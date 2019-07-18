@@ -49,14 +49,16 @@
 class dht11
 {
 private:
-  int sensorPin; //defaults to pin 2
+  int sensorPin = 2; //defaults to pin 2
+  double temperature;
+  double humidity;
+
 public:
   void attach(int pin); //Attaches dht11 object to a particular sensorPin
   int read();           //defaults to the attached pin
   int read(int pin);
-  double humidity;
-  double temperature;
-  double celcius();
-  double dewPointFast();
+  double getHumidity();
+  double getTemp();
+  double getDewPoint();
 };
 #endif

@@ -47,10 +47,6 @@ void dht11::attach(int pin)
 
 int dht11::read()
 {
-	if (sensorPin < 0)
-	{
-		attach(2);
-	}						//not a pin change to default pin 2
 	return read(sensorPin); //reads from attached sensorPin (attach command must be run first or this will use the default pin 2)
 }
 
@@ -150,16 +146,22 @@ int dht11::read(int pin)
 	return 0;
 }
 
-double dht11::celcius()
+double dht11::getTemp()
 {
 	read(); //make sure the temp has been read
 	return temperature;
 }
 
+double dht11::getHumidity()
+{
+	read(); //make sure the humidity has been read
+	return humidity;
+}
+
 // delta max = 0.6544 wrt dewPoint()
 // 5x faster than dewPoint()
 // reference: http://en.wikipedia.org/wiki/Dew_point
-double dht11::dewPointFast()
+double dht11::getDewPoint()
 {
 	read(); //make sure the temp has been read
 

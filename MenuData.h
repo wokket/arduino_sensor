@@ -12,7 +12,7 @@ enum menuCommandId
   mnuCmdBack = 0,
   mnuCmdTemp,
   mnuCmdHumidity,
-  mnuCmdPh
+  mnuCmdDewPoint
 };
 
 PROGMEM const char menu_back[] = "Back";
@@ -20,8 +20,8 @@ PROGMEM const char menu_exit[] = "Exit";
 
 PROGMEM const char menu_1[] = "Temp";
 PROGMEM const char menu_2[] = "Humidity";
-PROGMEM const char menu_3[] = "Ph";
-PROGMEM const MenuItem menu_Root[] = {{mnuCmdTemp, menu_1}, {mnuCmdHumidity, menu_2}, {mnuCmdPh, menu_3}, {mnuCmdBack, menu_exit}};
+PROGMEM const char menu_3[] = "Dew Point";
+PROGMEM const MenuItem menu_Root[] = {{mnuCmdTemp, menu_1}, {mnuCmdHumidity, menu_2}, {mnuCmdDewPoint, menu_3}, {mnuCmdBack, menu_exit}};
 
 /*
 case mnuCmdTemp :
@@ -40,7 +40,7 @@ case mnuCmdPh :
   <MenuItems>
     <Item Id="Temp" Name="Temp"/>
     <Item Id="Humidity" Name="Humidity"/>
-    <Item Id="Ph" Name="Ph"/>
+    <Item Id="DewPoint" Name="Dew Point"/>
   </MenuItems>
 </RootMenu>
 

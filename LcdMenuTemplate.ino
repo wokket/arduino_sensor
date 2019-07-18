@@ -48,8 +48,8 @@ void setup()
 
 void loop()
 {
-  int chk = DHT11.read();
-  /*
+  /* int chk = DHT11.read();
+ 
   switch (chk)
   {
   case 0:
@@ -83,6 +83,7 @@ void loop()
       refreshMenuDisplay(REFRESH_DESCEND);
     }
     break;
+
   case APP_MENU_MODE:
   {
     byte menuMode = Menu1.handleNavigation(getNavAction, refreshMenuDisplay);
@@ -108,6 +109,7 @@ void loop()
     }
     break;
   }
+
   case APP_PROCESS_MENU_CMD:
   {
     byte processingComplete = processMenuCommand(Menu1.getCurrentItemCmdId());
@@ -117,7 +119,8 @@ void loop()
       appMode = APP_MENU_MODE;
       // clear forward arrow and old readings
       lcd.setCursor(0, 1);
-      lcd.print("      ");
+      for (int i = 0; i < 15; i++)
+        lcd.print(" ");
     }
     break;
   }
@@ -139,17 +142,28 @@ byte processMenuCommand(byte cmdId)
   switch (cmdId)
   {
   case menuCommandId::mnuCmdTemp:
-    lcd.setCursor(2, 1);
-    lcd.print(DHT11.temperature, 1);
-    lcd.print("C");
-    Serial.print("Temperature (°C): ");
-    Serial.println(DHT11.temperature, 1);
-    break;
+  {
+    double temp = DHT11.getTemp();
 
+    lcd.setCursor(2, 1);
+    lcd.print(temp, 1);
+    lcd.print("C     ");
+
+    // Serial.print("Temperature (°C): ");
+    // Serial.println(temp, 1);
+
+    break;
+  }
   case menuCommandId::mnuCmdHumidity:
     lcd.setCursor(2, 1);
-    lcd.print((byte)DHT11.humidity);
-    lcd.print(" %");
+    lcd.print((byte)DHT11.getHumidity());
+    lcd.print(" %    ");
+    break;
+
+  case menuCommandId::mnuCmdDewPoint:
+    lcd.setCursor(2, 1);
+    lcd.print((byte)DHT11.getDewPoint());
+    lcd.print(" C     ");
     break;
 
   default:
